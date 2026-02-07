@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: eaglercraft-119-server
+    env: docker
+    repo: https://github.com/kabonk1/SHE-mc-server.git  
+    branch: main                                         
+    plan: free                                          
+    numInstances: 1
+    healthCheckPath: /                                   # 8081でウェルカムページが返るのでOK
+    autoDeploy: true                                     # プッシュ時に自動デプロイ
+    envVars:
+      - key: JAVA_OPTS
+        value: "-Dlog4j2.formatMsgNoLookups=true"
+    disk:
+      name: server-data
+      mountPath: /app/data
+      sizeGB: 10                                         # ワールド保存用（freeは制限あり）
